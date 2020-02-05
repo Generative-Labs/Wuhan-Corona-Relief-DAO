@@ -1,0 +1,260 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary" end>
+      <ion-back-button text="返回"></ion-back-button>
+    </ion-buttons>
+    <ion-title>shareOwnInfo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>分享信息</ion-card-title>
+    </ion-card-header>
+
+    <ion-list>
+      <form [formGroup]="shareInfoForm">
+        <ion-list-header>
+          <ion-label>基本信息</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-input placeholder="*团体名称/个人名称 - 可化名" formControlName="user_name"></ion-input>
+          <span
+            class="error ion-padding"
+            *ngIf="isSubmitted && errorControl.user_name.errors?.required"
+          >
+            请填写团体名称/个人名称
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="团体公众号或者官网链接地址" formControlName="organization_url"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="*国家" formControlName="region_1"></ion-input>
+          <span
+            class="error ion-padding"
+            *ngIf="isSubmitted && errorControl.region_1.errors?.required"
+          >
+            请填写国家
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="*地区（城市）" formControlName="region_2"></ion-input>
+          <span
+            class="error ion-padding"
+            *ngIf="isSubmitted && errorControl.region_2.errors?.required"
+          >
+            请填写地区（城市）
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-select placeholder="微信或手机" formControlName="contact_type">
+            <ion-select-option >手机</ion-select-option>
+            <ion-select-option >微信</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="具体联系方式（选填）" formControlName="contact_tel"></ion-input>
+        </ion-item>
+
+        <ion-list-header class="ion-activatable">
+          <ion-label>
+            分享已进行的捐助
+            <!-- <ion-icon
+              *ngIf="shareDonations == false"
+              name="arrow-down"
+              color="primary"
+            ></ion-icon>
+            <ion-icon
+              *ngIf="shareDonations == true"
+              name="arrow-up"
+              color="primary"
+            ></ion-icon> -->
+          </ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-list-header>
+
+        <!-- <ng-container *ngIf="shareDonations == true"> -->
+        <div formArrayName="donation_targets">
+          <div
+            *ngFor="
+              let target of donationTargetControls;
+              let i = index
+            "
+          >
+            <div [formGroupName]="i">
+              <ion-item>
+                <ion-input
+                  placeholder="*援助对象医院/社区名称"
+                  formControlName="hos_name"
+                ></ion-input>
+                <span
+                  class="error ion-padding"
+                  *ngIf="isSubmitted && donationTargetControls[i]['hos_name'].errors?.required"
+                >
+                  请填写援助对象医院/社区名称
+                </span>
+              </ion-item>
+              <ion-item>
+                <ion-select placeholder="*援助状态" formControlName="donation_status">
+                  <ion-select-option>已规划</ion-select-option>
+                  <ion-select-option>已采购</ion-select-option>
+                  <ion-select-option>已配送</ion-select-option>
+                  <ion-select-option>已成功送达</ion-select-option>
+                </ion-select>
+                <!-- <span
+                  class="error ion-padding"
+                  *ngIf="isSubmitted && donationTargetControls().donation_status.errors?.required"
+                >
+                  请填写援助状态
+                </span> -->
+              </ion-item>
+              <ion-item>
+                <ion-input
+                  placeholder="*援助品类与数量（可同时填写多个）"
+                  formControlName="type_amount"
+                ></ion-input>
+                <!-- <span
+                  class="error ion-padding"
+                  *ngIf="isSubmitted && donationTargetControls().type_amount.errors?.required"
+                >
+                  请填写援助品类与数量（可同时填写多个）
+                </span> -->
+              </ion-item>
+            </div>
+          </div>
+        </div>
+        <!-- <ion-item>
+            <ion-input placeholder="援助对象医院/社区名称"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-select placeholder="援助状态">
+              <ion-select-option>已规划</ion-select-option>
+              <ion-select-option>已采购</ion-select-option>
+              <ion-select-option>已配送</ion-select-option>
+              <ion-select-option>已成功送达</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              placeholder="援助品类与数量（可同时填写多个）"
+            ></ion-input>
+          </ion-item> -->
+
+        <!-- <ion-item>
+        <ion-label>援助品类</ion-label>
+        <ion-select placeholder="选择品类">
+        <ion-select-option *ngFor="let item of itemlist" [value]="item">{{item}}</ion-select-option>
+      </ion-select>
+      </ion-item> -->
+
+        <!-- <ion-item>
+        <ion-input placeholder="援助数目/数量"></ion-input>
+      </ion-item> -->
+
+        <!-- <ion-item class="ion-activatable" (click)="removeTargetField(i)">
+          <ion-label>减少已进行的援助</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-item> -->
+
+        <ion-item lines="none" class="ion-activatable" (click)="addNewTargetFields()">
+          <ion-label>添加已进行的援助</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+
+        <!-- </ng-container> -->
+
+        <!-- <ion-list-header class="ion-activatable" (click)="toggleSupplyChain()">
+          <ion-label>
+            分享靠谱物流
+            <ion-icon
+              *ngIf="shareSupplyChain == false"
+              name="arrow-down"
+              color="primary"
+            ></ion-icon>
+            <ion-icon
+              *ngIf="shareSupplyChain == true"
+              name="arrow-up"
+              color="primary"
+            ></ion-icon>
+          </ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-list-header>
+
+        <ng-container *ngIf="shareSupplyChain == true">
+          <ion-item>
+            <ion-input placeholder="物流方名称"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="物流方联系电话"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="物流方联系人（选填）"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="物流方国家"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="物流方地区"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              placeholder="关于物流方的备注（可分享评论等）"
+            ></ion-input>
+          </ion-item>
+        </ng-container> -->
+
+        <!-- <ion-list-header class="ion-activatable" (click)="toggleSupplier()">
+          <ion-label>
+            分享靠谱货源
+            <ion-icon
+              *ngIf="shareSupplier == false"
+              name="arrow-down"
+              color="primary"
+            ></ion-icon>
+            <ion-icon
+              *ngIf="shareSupplier == true"
+              name="arrow-up"
+              color="primary"
+            ></ion-icon>
+          </ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-list-header>
+
+        <ng-container *ngIf="shareSupplier == true">
+          <ion-item>
+            <ion-input placeholder="商家名称"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="货源商品品类"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="联系电话"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="联系人"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="货品规格（性能规格等）"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="货品资质标准的截图等链接"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input placeholder="备注（可分享评论等）"></ion-input>
+          </ion-item>
+        </ng-container> -->
+      </form>
+    </ion-list>
+
+    <!-- <ion-card-content>
+      填写分享
+      <ion-icon name="arrow-down"></ion-icon>
+    </ion-card-content> -->
+  </ion-card>
+
+  <ion-button expand="block" (click)="submit()">Button</ion-button>
+
+  
+</ion-content>

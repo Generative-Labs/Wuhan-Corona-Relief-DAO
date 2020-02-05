@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-back-button text="返回"></ion-back-button>
+    </ion-buttons>
+    <ion-title>找住处、找医疗条件</ion-title>
+    <!-- <ion-buttons slot="primary">
+      <ion-button color="primary" (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item lines = "none">
+      <ion-label>
+        选择查询省份
+      </ion-label>
+      <ion-select (ionChange)="setProvince()" [(ngModel)]="provinceobj">
+        <ion-select-option *ngFor="let location of locationsobj" [value]="location">
+          {{ location.province }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="showCityOptions" lines = "none">
+      <ion-label>
+        选择查询市
+      </ion-label>
+      <ion-select (ionChange)="searchhotels()" [(ngModel)]="cityparam">
+        <ion-select-option *ngFor="let city of provinceobj.cities" [value]="city">
+          {{ city }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+<!-- 
+      <ion-item>
+      <ion-label>
+        选择查询省份
+      </ion-label>
+      <ion-select (ionChange)="setProvince()" [(ngModel)]="provinceobj">
+        <ion-select-option *ngFor="let location of locationsobj" [value]="location">
+          {{ location.province }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="showCityOptions">
+      <ion-label>
+        选择查询市
+      </ion-label>
+      <ion-select (ionChange)="searchhotels()" [(ngModel)]="cityparam">
+        <ion-select-option *ngFor="let city of provinceobj.cities" [value]="city">
+          {{ city }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item> -->
+
+  <ion-spinner class="spin" *ngIf="show" color="primary"></ion-spinner>
+  <ion-card *ngFor="let hotel of hotels">
+    <ion-card-header>
+      <!-- <ion-card-subtitle></ion-card-subtitle> -->
+      <ion-card-title>{{ hotel.hotel_name }}</ion-card-title>
+      <ion-card-subtitle>{{ hotel.hotel_address }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        电话: {{ hotel.tel }}
+        <br />
+        联系人姓名：{{ hotel.contact_name }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary" end>
+      <ion-back-button text="返回"></ion-back-button>
+    </ion-buttons>
+    <ion-title>uploadSupplier</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header color="medium">
+      <ion-card-subtitle>一起做点小互助</ion-card-subtitle>
+      <ion-card-title>分享靠谱货源</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="shareSupplierForm">
+        <ion-item>
+          <ion-input placeholder="*商家名称" formControlName="supply_name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="*货源商品品类" formControlName="item_type"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="联系电话" formControlName="supply_tel"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="联系人" formControlName="supply_name"></ion-input>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-input placeholder="货品规格（性能规格等）" formControlName="supply_tel"></ion-input>
+        </ion-item> -->
+        <ion-item>
+          <ion-input placeholder="*货品国家" formControlName="supply_country"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="货品链接" formControlName="supply_link"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input placeholder="备注（可分享评论等）" formControlName="comment"></ion-input>
+        </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" (click)="submit()">Button</ion-button>
+</ion-content>

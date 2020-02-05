@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="primary">
+      <ion-button>
+      <ion-icon slot="icon-only" name="search"></ion-icon>
+    </ion-button>
+    </ion-buttons> -->
+    <ion-buttons slot="secondary" end>
+      <ion-back-button text="返回"></ion-back-button>
+    </ion-buttons>
+    <!-- <ion-searchbar placeholder="输入车次或航班次"></ion-searchbar> -->
+    <ion-title>查看确诊病例列车与航班</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner class="spin" *ngIf="show" color="primary"></ion-spinner>
+  <!-- <ion-searchbar placeholder="输入车次或航班次" mode="md" (value)="serial_no" (search)=></ion-searchbar> -->
+
+  <ion-card *ngFor="let transport of transports">
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{ transport.start_station }}
+        <ion-icon name="arrow-round-forward"></ion-icon>
+        {{ transport.des_station }}
+      </ion-card-subtitle>
+      <ion-card-title>
+        {{ transport.trans_type }}: {{ transport.serial_no }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>信息来源: {{ transport.source }}</ion-card-content>
+  </ion-card>
+  <!-- <ion-spinner class="spin" *ngIf="show" color="primary"></ion-spinner> -->
+</ion-content>

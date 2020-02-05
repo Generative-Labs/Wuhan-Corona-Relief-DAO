@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="secondary">
+      <ion-button>
+      <ion-icon slot="icon-only" name="search"></ion-icon>
+    </ion-button>
+    </ion-buttons> -->
+    <ion-buttons slot="secondary">
+      <ion-back-button text="返回"></ion-back-button>
+    </ion-buttons>
+    <ion-title>认领物资需求</ion-title>
+    <!-- <ion-buttons slot="primary">
+      <ion-back-button text="" icon="close"></ion-back-button>
+    </ion-buttons> -->
+
+    <!-- <ion-buttons slot="primary">
+      <ion-button color="primary" (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+
+    <!-- <ion-title>认领物资需求</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner class="spin" *ngIf="show" color="primary"></ion-spinner>
+  <ion-card class="ion-activatable" *ngFor="let need of needs">
+    <ion-card-header>
+     
+      <ion-card-title>{{ need.hos_name }}</ion-card-title> 
+      <ion-card-subtitle>联系人: {{ need.contact_name }}
+      <br />
+      联系方式: {{ need.tel }}</ion-card-subtitle>
+      <!-- need to add item names here -->
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-chip *ngFor="let tag of need.needs| slice:0:2; let i=index" color="secondary">
+        <ion-label>#{{ tag }}</ion-label>
+      </ion-chip>
+      <ng-container *ngIf="need.showAll==true;" >
+        <ion-chip *ngFor="let tag of need.needs| slice:2; let i=index" color="secondary">
+          <ion-label>#{{ tag }}</ion-label>
+        </ion-chip>
+      </ng-container>
+      <!-- <ion-chip *ngIf="need.show==true;" *ngFor="let tag of need.needs" color="secondary">
+        <ion-label>#{{ tag }}</ion-label>
+      </ion-chip> -->
+      <!-- <ion-chip (click)="showAllItems()" color="secondary"> -->
+      <ng-container *ngIf="need.showAll==false;" >
+        <ion-chip (click)="showAllItems($event, need)" color="secondary" tappable>
+          <ion-label>更多</ion-label>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-chip>
+      </ng-container>
+
+      <ng-container *ngIf="need.showAll==true;" >
+        <ion-chip (click)="collapseItems($event, need)" color="secondary" tappable>
+          <ion-label>折叠</ion-label>
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-chip>
+      </ng-container>
+      
+      <!-- <span style="color:#24d6ea;">更多</span> -->
+      <!-- <br />
+      联系人: {{ need.contact_name }}
+      <br />
+      联系方式: {{ need.tel }} -->
+      <!-- 数据确认前暂时不上线 -->
+      <!-- 需求状态：{{ need.status }}
+      <br />
+      预测可信度：{{ need.trust_level }} -->
+    </ion-card-content>
+    <ion-ripple-effect></ion-ripple-effect>
+  </ion-card>
+</ion-content>

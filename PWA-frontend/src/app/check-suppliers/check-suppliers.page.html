@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-back-button text="返回"></ion-back-button>
+    </ion-buttons>
+    <ion-title>checkSuppliers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner class="spin" *ngIf="show" color="primary"></ion-spinner>
+  <ion-card *ngFor="let supplier of suppliers">
+    <ion-card-header>
+      <ion-card-subtitle>{{ supplier.factory }}</ion-card-subtitle>
+      <ion-card-title>{{ supplier.good }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+     <p>联系方式：{{ supplier.tel }}<br>
+         地址: {{ supplier.address }}
+     </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

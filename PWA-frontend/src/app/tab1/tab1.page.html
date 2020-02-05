@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      一起支持，武汉！
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="ion-activatable" (click)="openNeedsUploadModal()">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-subtitle>我是医生/社区工作者</ion-card-subtitle>
+      <ion-card-title>有疫区物资需求！</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        报需求，连续更新状态
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="ion-activatable" routerLink="../../../find-hospitality">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-subtitle>我是武汉人在外地</ion-card-subtitle>
+      <ion-card-title>需要住处，需要医疗帮助！</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        找到有条件收纳的医院
+        <br />
+        找到愿意收留异地武汉人的酒店/民宿
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

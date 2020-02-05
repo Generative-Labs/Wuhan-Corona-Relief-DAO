@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>上传需求</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button color="primary" (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <!-- <ion-card-header>
+      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-title>Card Title</ion-card-title>
+    </ion-card-header> -->
+
+    <ion-card-content>
+      <form [formGroup]="needsForm" novalidate>
+        <h2>基本信息</h2>
+        <ion-input
+          placeholder="医院/社区名称（必填）"
+          formControlName="hos_name"
+          clearInput
+          required
+        ></ion-input>
+        <span
+          class="error ion-padding"
+          *ngIf="isSubmitted && errorControl.hos_name.errors?.required"
+        >
+          请填写医院/社区名称
+        </span>
+        <ion-input
+          placeholder="医院/社区地址（必填）"
+          formControlName="hos_address"
+          clearInput
+          required
+        ></ion-input>
+        <span
+          class="error ion-padding"
+          *ngIf="isSubmitted && errorControl.hos_address.errors?.required"
+        >
+          请填写地址
+        </span>
+        <h2>基本信息</h2>
+        <ion-input
+          placeholder="联系人姓名"
+          formControlName="contact_name"
+          clearInput
+        ></ion-input>
+        <ion-input placeholder="联系人电话（必填）" formControlName="contact_tel" clearInput required></ion-input>
+        <span
+          class="error ion-padding"
+          *ngIf="isSubmitted && errorControl.contact_tel.errors?.required"
+        >
+          请填写联系电话
+        </span>
+        <span
+          class="error ion-padding"
+          *ngIf="isSubmitted && (errorControl.contact_tel.errors?.minlength || errorControl.contact_tel.errors?.maxlength)"
+        >
+          手机号码需11位
+        </span>
+        <h2>需求品类信息</h2>
+        <ion-input
+          placeholder="需求品类名称（必填）"
+          formControlName="need"
+          clearInput
+          required
+        ></ion-input>
+        <span
+          class="error ion-padding"
+          *ngIf="isSubmitted && errorControl.need.errors?.required"
+        >
+          请填写品类名称
+        </span>
+        <ion-input
+          placeholder="需求品类数目/规模（必填）"
+          formControlName="amount"
+          clearInput
+          type="number"
+        ></ion-input>
+        <span
+          class="error ion-padding"
+          *ngIf="isSubmitted && errorControl.amount.errors?.required"
+        >
+          请填需求数目/规模
+        </span>
+        <ion-input
+          placeholder="需求备注（选填）"
+          formControlName="comment"
+          clearInput
+        ></ion-input>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <ion-button expand="block" (click)="submitAndCloseModal()">提交</ion-button>
+</ion-content>
+

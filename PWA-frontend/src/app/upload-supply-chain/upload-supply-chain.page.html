@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary" end>
+      <ion-back-button text="返回"></ion-back-button>
+    </ion-buttons>
+    <ion-title>uploadSupplyChain</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header color="medium">
+      <ion-card-subtitle>一起做点小互助</ion-card-subtitle>
+      <ion-card-title>分享靠谱物流</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="shareSupplyChainForm">
+        <ion-item>
+          <ion-input placeholder="*物流方名称" formControlName="logistic_name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="物流方联系电话" formControlName="logistic_tel"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="物流方联系人" formControlName="logistic_contact"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="*物流方国家" formControlName="logistic_country"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input placeholder="关于物流方的备注（可分享评论等）" formControlName="comment"></ion-input>
+        </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" (click)="submit()">分享！</ion-button>
+</ion-content>

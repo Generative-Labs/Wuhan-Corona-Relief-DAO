@@ -1,0 +1,183 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>一起为援助，行动！</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="ion-activatable" routerLink="../../../info-verification">
+    <ion-card-header color="light">
+      <ion-card-subtitle>已有****人通过DAO微援助帮助武汉！</ion-card-subtitle>
+      <ion-card-title>微援助：协助电话确认信息</ion-card-title>
+      <ion-card-subtitle>马上拿起手机为援助献力</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <hr />
+      <ion-item color="light" lines="none">
+        <ion-label>
+          安徽医科大学附属巢湖医院
+          <br />
+          联系电话：*****【内测期】
+        </ion-label>
+      </ion-item>
+      <!-- <hr /> -->
+      <p style="font-size:0.7em; padding-top:0.3em; text-align:right;">
+        点进更新验证结果
+      </p>
+    </ion-card-content>
+    <ion-ripple-effect></ion-ripple-effect>
+  </ion-card>
+
+  <ion-card
+    class="ion-activatable"
+    routerLink="../../../share-own-info"
+    routerDirection="forward"
+  >
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-subtitle>我们是志愿者团体</ion-card-subtitle>
+      <ion-card-title>分享公开我们已进行中的援助信息</ion-card-title>
+      <ion-card-subtitle>货源、物流、援助对象等</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        【重要】由于眼下信息不通，民间自发单寄一方面效果显著，另一方面个别医院/社区援助过于集中，其他的被疏漏物资急缺
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card routerLink="../../../upload-supply-chain">
+    <ion-card-header>
+      <ion-card-subtitle>做点小互助</ion-card-subtitle>
+      <ion-card-title>分享靠谱物流信息</ion-card-title>
+    </ion-card-header>
+
+    <!-- <ion-card-content>
+      Keep close to Nature's heart..
+    </ion-card-content> -->
+  </ion-card>
+
+  <ion-card routerLink="../../../upload-supplier">
+    <ion-card-header>
+      <ion-card-subtitle>做点小互助</ion-card-subtitle>
+      <ion-card-title>分享靠谱货源信息</ion-card-title>
+    </ion-card-header>
+
+    <!-- <ion-card-content>
+      Keep close to Nature's heart... 
+    </ion-card-content> -->
+  </ion-card>
+
+
+  <!-- <ion-card class="ion-activatable" routerLink="../../../upload-info"> -->
+  <ion-card class="ion-activatable">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-subtitle>我是志愿者</ion-card-subtitle>
+      <ion-card-title>
+        【ver0.2上线】我有需求/物流/货源等局部资源求对接
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        帮助大家一起组织信息:
+        <br />
+        - 靠谱货源
+        <br />
+        - 物流渠道
+        <br />
+        - 靠谱资金渠道
+        <br />
+        - 海关渠道
+        <br />
+        - 医疗/心理援助
+        <br />
+        -
+        分享自己团体已经进行中的援助（【重要】眼下信息不通个别医院/社区援助过于集中，其他的物资急缺）
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- <ion-card class="ion-activatable" routerLink="../../../view-and-adopt-needs" routerDirection="forward">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-subtitle>我是志愿者</ion-card-subtitle>
+      <ion-card-title>有物资想捐献/想认领需求！</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        报资源，连续跟踪捐助动向 (ver 0.1只对接需求信息，暂不支持直接供应链)
+      </p>
+    </ion-card-content>
+  </ion-card> -->
+
+  <ng-container *ngFor="let item of objects">
+    <ion-card *ngIf="item.type === 'share_donation'">
+      <ion-card-header>
+        <ion-card-subtitle>{{item.type}}</ion-card-subtitle>
+        <ion-card-title>{{item.content.user_name}}</ion-card-title>
+        <ion-card-subtitle>捐向：{{item.content.hos_name}}</ion-card-subtitle>
+        <ion-card-subtitle>物品：{{item.content.type_amount}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        信息状态：{{item.content.validation}}
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="item.type === 'share_logistic'">
+      <ion-card-header>
+        <ion-card-subtitle>{{ item.type }}</ion-card-subtitle>
+        <ion-card-title>{{ item.content.logistic_name }}</ion-card-title>
+        <ion-card-subtitle>物流方国家：{{ item.content.logistic_country }}</ion-card-subtitle>
+        <ion-card-subtitle>联系方式：{{ item.content.logistic_tel }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        信息状态：{{item.content.validation}} 
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="item.type === 'share_source'">
+      <ion-card-header>
+        <ion-card-subtitle>{{ item.type }}</ion-card-subtitle>
+        <ion-card-title>{{ item.content.item_type }}</ion-card-title>
+        <ion-card-subtitle>货源商：{{ item.content.supply_name }}</ion-card-subtitle>
+        <ion-card-subtitle>所在国家：{{ item.content.supply_country }}</ion-card-subtitle>
+        <ion-card-subtitle>联系方式：{{ item.content.supply_tel }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        信息状态：{{item.content.validation}} 
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <!-- 后续版本上线 -->
+  <!-- <ion-card class="ion-activatable">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-subtitle>我是爱心人士</ion-card-subtitle>
+      <ion-card-title>有资金想要拿来资助</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        捐款，连续跟踪捐助动向（ver 0.1
+        trustless版本由于信用级别在提升中，不支持直接捐款）
+      </p>
+    </ion-card-content>
+  </ion-card> -->
+
+  <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+</ion-content>
